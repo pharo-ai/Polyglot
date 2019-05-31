@@ -6,4 +6,15 @@
 [![Pharo version](https://img.shields.io/badge/Pharo-6.1-%23aac9ff.svg)](https://pharo.org/download)
 [![Pharo version](https://img.shields.io/badge/Pharo-7.0-%23aac9ff.svg)](https://pharo.org/download)
 [![Pharo version](https://img.shields.io/badge/Pharo-8.0-%23aac9ff.svg)](https://pharo.org/download)
+
 A library for Natural Language Processing implemented in Pharo
+
+## Installation
+To install Polyglot, go to the Playground (`Ctrl+OW`) in your fresh Pharo image and execute the following Metacello script (select it and press Do-it button or `Ctrl+D`):
+
+```smalltalk
+Metacello new
+  baseline: 'Polyglot';
+  repository: 'github://PolyMathOrg/Polyglot/src';
+  load.
+```
