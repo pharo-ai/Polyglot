@@ -34,21 +34,11 @@ PGTokenizerTest >> testSentenceLevelTokenizationOnSingleSent [
 ]
 
 { #category : #tests }
-PGTokenizerTest >> testSplitTextIntoWords [
-	|text result expected|
-	text := 'This is a test string.'.
-	result := (tokenizer splitTextIntoWords: text) asArray .
-	
-	expected := #('This' 'is' 'a' 'test' 'string.').
-	self assert: result equals: expected.
-]
-
-{ #category : #tests }
 PGTokenizerTest >> testTokenize [
 	"The simplest example of tokenization. Split string of words separated by spaces into an array of words"
 	| text result expected |
 	text := 'This is a test string'.
-	expected := #('This' 'is' 'a' 'test' 'string').
+	expected := #(This is a test string).
 	result := tokenizer tokenize: text.
 	self assert: result equals: expected.
 ]
@@ -71,19 +61,16 @@ PGTokenizerTest >> testTokenizeWithAbbreviationsWithDots [
 	expected := #(He defended his 'Ph.D.' yesterday .).
 	result := tokenizer tokenize: text.
 	self assert: result equals: expected.
-
 ]
 
 { #category : #tests }
-PGTokenizerTest >> testTokenizeWithAbbreviationsWithNumbers [ 
+PGTokenizerTest >> testTokenizeWithAbbreviationsWithNumbers [
 	"Tokenize a sentence with numbers. Each number should be treated as a single token"
 	| text result expected |
 	text := 'Here are some numbers: 42, 42.4, -0.5, 1/2, 6.02e23, -0.03E-13'.
 	expected := #(Here are some numbers : '42' , '42.4' , '-0.5' , '1/2' , '6.02e23', '-0.03E-13').
 	result := tokenizer tokenize: text.
 	self assert: result equals: expected.
-
-
 ]
 
 { #category : #tests }
@@ -94,18 +81,14 @@ PGTokenizerTest >> testTokenizeWithApostrophe [
 	expected := #(This is 'Sam''s').
 	result := tokenizer tokenize: text.
 	self assert: result equals: expected.
-
-
-
 ]
 
 { #category : #tests }
-PGTokenizerTest >> testTokenizeWithPunctuation [ 
+PGTokenizerTest >> testTokenizeWithPunctuation [
 	"Tokenize a sentence with punctuation. Every individual punctuation symbol must be considered as a separate token"
 	| text result expected |
 	text := 'This, this, and this are words!!'.
 	expected := #(This , this , and this are words ! !).
 	result := tokenizer tokenize: text.
 	self assert: result equals: expected.
-
 ]
