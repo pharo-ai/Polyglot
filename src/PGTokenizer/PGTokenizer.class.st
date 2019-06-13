@@ -36,6 +36,13 @@ PGTokenizer >> tokenize: aDocOrString [
 ]
 
 { #category : #'as yet unclassified' }
+PGTokenizer >> tokenizeFlatten: aDocOrString [
+	|sentences|
+	sentences := self sentenceTokenize: aDocOrString.
+	^ (sentences collect: [ :each | self wordTokenize: each ]) flatCollect: [ :e | e ]
+]
+
+{ #category : #'as yet unclassified' }
 PGTokenizer >> wordTokenize: aString [
 	|streamPointer cur word wordCollection|
 	streamPointer := ReadStream on: aString.

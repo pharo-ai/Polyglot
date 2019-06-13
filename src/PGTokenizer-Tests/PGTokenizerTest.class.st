@@ -43,6 +43,16 @@ PGTokenizerTest >> testTokenize [
 	self assert: result equals: expected.
 ]
 
+{ #category : #'as yet unclassified' }
+PGTokenizerTest >> testTokenizeFlatten [
+	|result expected text|
+	text := 'This is test sentence 1. This is test sentence 2.'.
+	
+	expected := #('This' 'is' 'test' 'sentence' '1.' 'This' 'is' 'test' 'sentence' '2.').
+	result := tokenizer tokenizeFlatten: text.
+	self assert: result equals: expected.
+]
+
 { #category : #tests }
 PGTokenizerTest >> testTokenizeWithAbbreviations [
 	"Tokenize a sentence with abbreviations. Each abbreviation should be treated as a single token"
