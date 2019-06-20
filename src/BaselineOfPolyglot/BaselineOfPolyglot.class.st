@@ -23,7 +23,7 @@ BaselineOfPolyglot >> baseline: spec [
 			package: 'PGTF-IDF-Tests' with: [ spec requires: #('PGTF-IDF' 'DataFrame') ].
 			
 		spec for: #'pharo6.x' do: [
-			spec package: 'Ngram-Pharo6' ]
+			spec package: 'PGNgram-Pharo6' ]
 			
 			].
 ]
