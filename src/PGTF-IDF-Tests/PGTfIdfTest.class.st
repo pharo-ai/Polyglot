@@ -35,7 +35,7 @@ PGTfIdfTest >> testBuildTFIDFTable [
 	
 	result := tfidf buildTfIdfTable.
 	
-	self assert: result closeTo: expected. 
+	self assert: (result closeTo: expected). 
 	
 		
 	
