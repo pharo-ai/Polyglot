@@ -20,6 +20,28 @@ PGTfIdfTest >> setUp [
 ]
 
 { #category : #tests }
+PGTfIdfTest >> testBuildTFIDFTable [
+	|result expected|
+	
+	tfidf corpus: #(
+		(The car is driven on the road)
+		(The truck is driven on the highway)).
+	
+	expected := DataFrame withRows: #(
+													#(0 0 0 0 0 0 0.043 0 0.043)
+													#(0.043 0.043 0 0 0 0 0 0 0)
+												)
+								columnNames: #(truck highway the on is The car driven road).
+	
+	result := tfidf buildTfIdfTable.
+	
+	self assert: result closeTo: expected. 
+	
+		
+	
+]
+
+{ #category : #tests }
 PGTfIdfTest >> testBuildTFSingleDoc [
 	|expected result|
 	
