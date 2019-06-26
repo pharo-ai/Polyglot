@@ -45,14 +45,13 @@ PGTfIdf >> buildTfIdfTable [
 	tfVect := OrderedCollection new.
 	
 	self buildVocab.
-	corpus do: [ :each | tfVect add: (((self buildTfDoc: each) values) asPMVector) . ].
+	corpus do: [ :each | tfVect add: (((self buildTfDoc: each) values)) . ].
 	
 	tfVect := tfVect asArray.
 	vocab := vocab asArray.
 
 	idfVect := vocab collect: [ :each | self inverseDocumentFrequencyOf: each ]. 
-	idfVect := idfVect asPMVector.
-	tfVect := tfVect collect: [:each | each dot: idfVect ].
+	tfVect := tfVect collect: [:each | each * idfVect ].
 	
 	tftable := DataFrame withRows: tfVect columnNames: vocab.
 	^tftable
