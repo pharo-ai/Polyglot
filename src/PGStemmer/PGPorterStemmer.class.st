@@ -4,6 +4,28 @@ Class {
 	#category : #PGStemmer
 }
 
+{ #category : #'instance creation' }
+PGPorterStemmer class >> for: aString [
+    ^ super new initialize: aString.
+]
+
+{ #category : #'instance creation' }
+PGPorterStemmer class >> new [
+    self shouldNotImplement.
+]
+
+{ #category : #'as yet unclassified' }
+PGPorterStemmer class >> stemOf: aString [
+    | stemmer |
+    stemmer := self for: aString.
+    ^ stemmer performStemming: aString.
+]
+
+{ #category : #initialization }
+PGPorterStemmer >> initialize: aString [
+    string := aString asLowercase.
+]
+
 { #category : #testing }
 PGPorterStemmer >> isVowelAt: anIndex [
 	
@@ -87,24 +109,19 @@ PGPorterStemmer >> step1a [
 				ifTrue:
 					[string := string
 						copyFrom: 1
-						to: string size - 2]
+						to: string size - 2.^self]
 				ifFalse:
 					[(self endsWith: #ies)
 						ifTrue:
 							[string := string
 								copyFrom: 1
-								to: string size - 2]
+								to: string size - 2.^self]
 						ifFalse:
 							[(self endsWith: #ss)
 								ifFalse:
 									[string := string
 										copyFrom: 1
-										to: string size - 1]]]]	"#(#(#sses #ss) #(#ies #i) #(#ss #ss) #(#s #'')) do: 
-			[:rule | 
-			(self endsWith: rule first) 
-				ifTrue: 
-					[self setSuffix: rule last.
-					^nil]]"
+										to: string size - 1.^self]]]]
 ]
 
 { #category : #'as yet unclassified' }
@@ -114,7 +131,7 @@ PGPorterStemmer >> step1b [
 	(self endsWith: 'eed')
 		ifTrue:
 			[cursor >= r1 ifTrue: [self setSuffix: 'ee'].
-			^nil].
+			^self].
 	(((self endsWith: 'ed') or: [self endsWith: 'ing'])
 		and: [self stemIncludesVowel])
 		ifTrue:
@@ -125,7 +142,7 @@ PGPorterStemmer >> step1b [
 					(self endsWith: rule first)
 						ifTrue:
 							[self setSuffix: rule last.
-							^nil]].
+							^self]].
 			cursor := string size.
 			(self stemEndsWithDoubleConsonant
 				and:
@@ -135,7 +152,7 @@ PGPorterStemmer >> step1b [
 					[string := string
 						copyFrom: 1
 						to: string size - 1.
-					^nil].
+					^self].
 			(cursor = r1 and: [self stemEndsWithConsonantVowelConsonant])
 				ifTrue: [self setSuffix: 'e']]
 ]
@@ -148,7 +165,7 @@ PGPorterStemmer >> step1c [
 		ifTrue:
 			[string
 				at: string size
-				put: $i]
+				put: $i. ^self]
 ]
 
 { #category : #pages }
@@ -161,7 +178,7 @@ PGPorterStemmer >> step2 [
 			(self endsWith: (rule at: 1))
 				ifTrue:
 					[cursor >= r1 ifTrue: [self setSuffix: (rule at: 2)].
-					^nil]]
+					^self]]
 ]
 
 { #category : #pages }
@@ -173,7 +190,7 @@ PGPorterStemmer >> step3 [
 			(self endsWith: rule first)
 				ifTrue:
 					[cursor >= r1 ifTrue: [self setSuffix: rule last].
-					^nil]]
+					^self]]
 ]
 
 { #category : #pages }
@@ -185,20 +202,20 @@ PGPorterStemmer >> step4 [
 			(self endsWith: rule)
 				ifTrue:
 					[cursor >= r2 ifTrue: [self removeSuffix].
-					^nil]].
+					^self]].
 	((self endsWith: 'ion') and: [cursor >= r2])
 		ifTrue:
 			[(string at: cursor) == $s | ((string at: cursor) == $t)
 				ifTrue:
 					[self removeSuffix.
-					^nil]].
+					^self]].
 	#(#ant #ent #ism #ate #iti #ous #ive #ize #al #er #ic #ou)
 		do:
 			[:rule | 
 			(self endsWith: rule)
 				ifTrue:
 					[cursor >= r2 ifTrue: [self removeSuffix].
-					^nil]]
+					^self]]
 ]
 
 { #category : #'as yet unclassified' }
@@ -212,7 +229,7 @@ PGPorterStemmer >> step5a [
 					[string size > r1 and: [self stemEndsWithConsonantVowelConsonant not]]])
 		ifTrue:
 			[self removeSuffix.
-			^nil]
+			^self]
 ]
 
 { #category : #'as yet unclassified' }
@@ -220,5 +237,10 @@ PGPorterStemmer >> step5b [
 	
 	cursor := string size.
 	((self endsWith: 'll') and: [cursor + 1 >= r2])
-		ifTrue: [self setSuffix: 'l']
+		ifTrue: [self setSuffix: 'l'. ^self]
+]
+
+{ #category : #accessing }
+PGPorterStemmer >> string [ 
+	^string
 ]
