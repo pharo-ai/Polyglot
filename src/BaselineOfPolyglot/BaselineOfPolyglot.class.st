@@ -12,7 +12,12 @@ BaselineOfPolyglot >> baseline: spec [
 		spec
 			baseline: 'DataFrame'
 			with: [ spec repository: 'github://PolyMathOrg/DataFrame/src' ].
+
 		
+                spec
+			baseline: 'Atlas'
+			with: [ spec repository: 'https://github.com/kilon/Atlas/src' ].
+
 		"Packages"
 		spec 
 			package: 'PGTokenizer';
