@@ -16,7 +16,7 @@ BaselineOfPolyglot >> baseline: spec [
 		
                 spec
 			baseline: 'Atlas'
-			with: [ spec repository: 'https://github.com/kilon/Atlas/' ].
+			with: [ spec repository: 'https://github.com/kilon/Atlas/tree/master/BaselineOfAtlas.package' ].
 
 		"Packages"
 		spec 
