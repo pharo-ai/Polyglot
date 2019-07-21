@@ -11,6 +11,15 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+PGPosTagger >> computeEmissionProbabilities [
+	|countOfTag countOfWordGivenTag probabilityOfWordGivenTag|
+	
+	countOfTag := Bag withAll: hiddenStates .
+	countOfWordGivenTag := 0.
+	probabilityOfWordGivenTag := 0.
+]
+
+{ #category : #'as yet unclassified' }
 PGPosTagger >> computeTransitionProbabilities [
 	|transitionProbabilities nHiddenStateCount historyHiddenStateCount|
 	transitionProbabilities := Dictionary new.
