@@ -14,9 +14,9 @@ BaselineOfPolyglot >> baseline: spec [
 			with: [ spec repository: 'github://PolyMathOrg/DataFrame/src' ].
 
 		
-                spec
+      spec
 			baseline: 'Atlas'
-			with: [ spec repository: 'https://github.com/kilon/Atlas/tree' ].
+			with: [ spec repository: 'https://github.com/nikhilpinnaparaju/AtlasIceberg/' ].
 
 		"Packages"
 		spec 
