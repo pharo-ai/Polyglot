@@ -32,7 +32,7 @@ PGBigramPosTagger >> computeTransitionProbabilities [
 	
 	nHiddenStateCount do: [ :each | transitionProbabilities at: each put: ((nHiddenStateCount occurrencesOf: each) / (historyHiddenStateCount occurrencesOf: each history)) ].
 	
-	^nHiddenStateCount
+	^transitionProbabilities
 ]
 
 { #category : #'as yet unclassified' }
@@ -49,8 +49,13 @@ PGBigramPosTagger >> ngrams: value elements: aCollection padWith: padSymbol [
 
 { #category : #'as yet unclassified' }
 PGBigramPosTagger >> trainOn: anArrayOfArrays [
-	
+	|hmm |
 	trainData := anArrayOfArrays.
 	trainTokens := anArrayOfArrays collect: [ :array | (array at: 1) asLowercase ].
 	hiddenStates := anArrayOfArrays collect: [ :array | (array at: 2) ].
+	
+	hmm := PGHiddenMarkovModel new.
+	hmm withTransitions: self computeTransitionProbabilities  andEmissions: self computeEmissionProbabilities andStates: hiddenStates asSet andObservations: trainTokens asSet.
+	^hmm
+	
 ]
