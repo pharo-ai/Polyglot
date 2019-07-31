@@ -16,7 +16,7 @@ BaselineOfPolyglot >> baseline: spec [
 		
       spec
 			baseline: 'Atlas'
-			with: [ spec repository: 'https://github.com/nikhilpinnaparaju/AtlasIceberg/' ].
+			with: [ spec repository: 'github.com://nikhilpinnaparaju/AtlasIceberg/' ].
 
 		"Packages"
 		spec 
