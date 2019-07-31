@@ -23,6 +23,7 @@ BaselineOfPolyglot >> baseline: spec [
 			package: 'PGTF-IDF-Tests' with: [ spec requires: #('PGTF-IDF' 'DataFrame') ];
 			package: 'PGLanguageModel';
 			package: 'PGLanguageModel-Tests' with: [ spec requires: #('PGLanguageModel') ];
+			package: 'PGAtlasBridge';
 			package: 'PGNamedEntityRecognizer' with: [ spec requires: #('PGAtlasBridge') ];
 			package: 'PGDependencyParser' with: [ spec requires: #('PGAtlasBridge') ]
 			.
