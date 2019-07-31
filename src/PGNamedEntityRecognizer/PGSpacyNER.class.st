@@ -8,7 +8,7 @@ Class {
 PGSpacyNER >> raw_parse: aString [
 	|nerString|
 	
-	Atlas sendMessage: 
+	PGAtlasBridge sendMessage: 
 'import spacy
 
 nlp = spacy.load("en")
@@ -18,7 +18,7 @@ for ent in doc.ents:
 	pair = {}
 	pair[ent.text] = ent.label_
 	ents.append(pair)'.
-	nerString := Atlas getValue: 'ents'.
+	nerString := PGAtlasBridge getValue: 'ents'.
 
 	^nerString
 ]

@@ -8,12 +8,12 @@ Class {
 PGNltkPosTagger >> raw_parse: aString [
 	|posTagString|
 	
-	Atlas sendMessage: 
+	PGAtlasBridge sendMessage: 
 'import nltk
 tokens = nltk.word_tokenize("',aString,'")
 postags = nltk.pos_tag(tokens)
 '.
-	posTagString := Atlas getValue: 'postags'.
+	posTagString := PGAtlasBridge getValue: 'postags'.
 
 	^posTagString
 ]

@@ -8,7 +8,7 @@ Class {
 PGSpacyDependencyParser >> raw_parse: aString [
 	|dependencyParseString|
 	
-	Atlas sendMessage: 
+	PGAtlasBridge sendMessage: 
 'import spacy
 
 nlp = spacy.load("en")
@@ -20,7 +20,7 @@ for token in doc:
 	pair.append(token.dep_)
 	pair.append(token.head.text)
 	relations.append(pair)'.
-	dependencyParseString := Atlas getValue: 'relations'.
+	dependencyParseString := PGAtlasBridge getValue: 'relations'.
 
 	^dependencyParseString
 ]

@@ -13,11 +13,6 @@ BaselineOfPolyglot >> baseline: spec [
 			baseline: 'DataFrame'
 			with: [ spec repository: 'github://PolyMathOrg/DataFrame/src' ].
 
-		
-      spec
-			baseline: 'Atlas'
-			with: [ spec repository: 'github.com://nikhilpinnaparaju/AtlasIceberg/' ].
-
 		"Packages"
 		spec 
 			package: 'PGTokenizer';
@@ -28,8 +23,8 @@ BaselineOfPolyglot >> baseline: spec [
 			package: 'PGTF-IDF-Tests' with: [ spec requires: #('PGTF-IDF' 'DataFrame') ];
 			package: 'PGLanguageModel';
 			package: 'PGLanguageModel-Tests' with: [ spec requires: #('PGLanguageModel') ];
-			package: 'PGNamedEntityRecognizer' with: [ spec requires: #('Atlas') ];
-			package: 'PGDependencyParser' with: [ spec requires: #('Atlas') ]
+			package: 'PGNamedEntityRecognizer' with: [ spec requires: #('PGAtlasBridge') ];
+			package: 'PGDependencyParser' with: [ spec requires: #('PGAtlasBridge') ]
 			.
 			
 			
