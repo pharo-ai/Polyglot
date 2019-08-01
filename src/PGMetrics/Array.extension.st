@@ -14,3 +14,13 @@ Array >> cosineSimilarity: anArray [
 Array >> elementwiseProd: anArray [
 	^ self * anArray 
 ]
+
+{ #category : #'*PGMetrics' }
+Array >> euclideanDistance: anArray [
+	^((self - anArray) raisedTo: 2) sum sqrt.
+]
+
+{ #category : #'*PGMetrics' }
+Array >> manhattanDistance: anArray [
+	^(self - anArray) abs sum. 
+]
