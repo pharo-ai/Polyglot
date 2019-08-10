@@ -81,7 +81,7 @@ PGTfIdf >> corpus: newCorpus [
 
 	corpus := newCorpus.
 	self buildVocab.
-	
+	^ self buildTfIdfTable.
 ]
 
 { #category : #'as yet unclassified' }
