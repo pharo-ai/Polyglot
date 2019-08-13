@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #tests }
-EuclideanDistanceTest >> testCosineSimilarity [
+EuclideanDistanceTest >> testEuclideanDistance [
 	| result actual |
 	
 	result := #(0 3 4 5) euclideanDistance: #(7 6 3 -1).
