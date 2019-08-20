@@ -18,7 +18,7 @@ PGPorterStemmer class >> new [
 PGPorterStemmer class >> stemOf: aString [
     | stemmer |
     stemmer := self for: aString.
-    ^ stemmer performStemming: aString.
+	 aString isCharacter ifTrue: [^aString] ifFalse: [^stemmer performStemming: aString].
 ]
 
 { #category : #initialization }
