@@ -18,3 +18,12 @@ Metacello new
   repository: 'github://PolyMathOrg/Polyglot/src';
   load.
 ```
+
+## List of Supported Features
+
+* Tokenization
+* Stemming
+* POS-tagging
+* TF-IDF
+* N-gram Language Model
+* Metrics (cosine similarity, euclidean distance, etc.)
