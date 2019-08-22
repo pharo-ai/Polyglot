@@ -26,7 +26,7 @@ BaselineOfPolyglot >> baseline: spec [
 			package: 'PGMetrics';
 			package: 'PGMetrics-Tests' with: [ spec requires: #('PGMetrics') ];
 			package: 'PGPosTagger' with: [ spec requires: #('PGAtlasBridge' 'PGModels') ];
-			package: 'PGPosTaggerTests' with: [ spec requires: #('PGPosTagger') ].
+			package: 'PGPosTaggerTests' with: [ spec requires: #('PGPosTagger') ]. 
 			
 		spec for: #'pharo6.x' do: [
 			spec package: 'PGNgram-Pharo6' ]
