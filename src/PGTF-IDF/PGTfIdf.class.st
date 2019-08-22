@@ -12,18 +12,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-PGTfIdf >> BOW: doc [
-	"Bag of Words of a Document"
-
-	| bagofwords |
-	bagofwords := Bag new.
-	
-	doc do: [ :each | bagofwords add: each ].
-	
-	^bagofwords
-]
-
-{ #category : #'as yet unclassified' }
 PGTfIdf >> buildTfDoc: doc [
 	"calculate Term frequencies of a single doc"
 	| tokens len tfs |
@@ -67,7 +55,7 @@ PGTfIdf >> buildVocab [
 
 { #category : #'as yet unclassified' }
 PGTfIdf >> computeFullBagOfWords [
-	corpusBagOfWords := corpus collect: [ :each | self BOW: each ].
+	corpusBagOfWords := corpus collect: [ :each | each asBag ].
 ]
 
 { #category : #accessing }
