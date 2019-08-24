@@ -22,6 +22,8 @@ BaselineOfPolyglot >> baseline: spec [
 			package: 'PGAtlasBridge';
 			package: 'PGNamedEntityRecognizer' with: [ spec requires: #('PGAtlasBridge') ];
 			package: 'PGDependencyParser' with: [ spec requires: #('PGAtlasBridge') ];
+			package: 'PGStemmer';
+			package: 'PGStemmer-Tests' with: [ spec requires: #('PGStemmer') ];
 			package: 'PGModels';
 			package: 'PGMetrics';
 			package: 'PGMetrics-Tests' with: [ spec requires: #('PGMetrics') ];
