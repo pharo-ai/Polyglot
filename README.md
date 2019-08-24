@@ -88,3 +88,4 @@ A library for Natural Language Processing implemented in Pharo.
 
 ## Project Demonstration/Presentation
 - [Polyglot ESUG Presention V1.0](https://drive.google.com/file/d/18J2bgdrJ6Dhbaxg1-N3hC8-ZD7y0P9yp/view?usp=sharing)
+- [Polyglot ESUG Presention V2.0](https://drive.google.com/file/d/1kin4eC6oh6Th0P9tk_Y93E4i6BNXW2wY/view?usp=sharing)
