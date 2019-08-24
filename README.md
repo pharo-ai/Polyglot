@@ -21,9 +21,16 @@ Metacello new
 
 ## List of Supported Features
 
-* Tokenization
-* Stemming
-* POS-tagging
-* TF-IDF
-* N-gram Language Model
-* Metrics (cosine similarity, euclidean distance, etc.)
+- Tokenization
+- N-grams
+- Term Frequency-Inverse Document Frequency Scoring
+- N-Gram Language Modelling
+- Stemming
+- Part of Speech Tagging
+- Named Entity Recognizer
+- Dependency Parser
+- Modified Atlas Bridge
+- Common Vector Metrics
+
+## More
+For more resources checkout the [Project Report](https://gist.github.com/nikhilpinnaparaju/1ebdc5899e5f9bc90c64b92d3d4cde54)
