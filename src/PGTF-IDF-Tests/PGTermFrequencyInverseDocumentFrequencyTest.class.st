@@ -20,17 +20,6 @@ PGTermFrequencyInverseDocumentFrequencyTest >> setUp [
 ]
 
 { #category : #tests }
-PGTermFrequencyInverseDocumentFrequencyTest >> testCountInAllDocuments [
-	| words expectedCounts actualCounts |
-	words := #(I am Sam 'don''t' like green eggs and ham).
-	
-	expectedCounts := #(3 2 2 1 1 1 1 1 1).
-	actualCounts := words collect: [ :w | tfidf countInAllDocuments: w ].
-	
-	self assert: actualCounts equals: expectedCounts
-]
-
-{ #category : #tests }
 PGTermFrequencyInverseDocumentFrequencyTest >> testInverseDocumentFrequencyOf [
 	| words expected actual |
 	words := #(I am Sam 'don''t' like green eggs and ham).

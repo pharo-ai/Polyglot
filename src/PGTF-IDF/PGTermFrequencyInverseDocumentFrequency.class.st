@@ -10,11 +10,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-PGTermFrequencyInverseDocumentFrequency >> countInAllDocuments: aWord [
-	^ totalWordCounts occurrencesOf: aWord
-]
-
-{ #category : #'as yet unclassified' }
 PGTermFrequencyInverseDocumentFrequency >> inverseDocumentFrequencyOf: aWord [
 	^ (self numberOfDocuments / (self numberOfDocumentsThatContainWord: aWord)) ln.
 ]
