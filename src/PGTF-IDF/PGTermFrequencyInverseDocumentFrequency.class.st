@@ -13,6 +13,12 @@ PGTermFrequencyInverseDocumentFrequency >> inverseDocumentFrequencyOf: aWord [
 	^ (self numberOfDocuments / (self numberOfDocumentsThatContainWord: aWord)) ln.
 ]
 
+{ #category : #'instance creation' }
+PGTermFrequencyInverseDocumentFrequency >> log: aNumber [
+	"Natural logarithm used o compute IDF. Can be overriden by subclasses"
+	^ aNumber ln
+]
+
 { #category : #'as yet unclassified' }
 PGTermFrequencyInverseDocumentFrequency >> numberOfDocuments [
 	^ numberOfDocuments 
