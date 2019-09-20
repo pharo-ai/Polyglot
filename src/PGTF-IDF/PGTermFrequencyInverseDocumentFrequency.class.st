@@ -2,7 +2,6 @@ Class {
 	#name : #PGTermFrequencyInverseDocumentFrequency,
 	#superclass : #Object,
 	#instVars : [
-		'totalWordCounts',
 		'perWordDocumentCount',
 		'numberOfDocuments'
 	],
@@ -41,7 +40,6 @@ PGTermFrequencyInverseDocumentFrequency >> termFrequencyOf: aWord in: aDocument 
 { #category : #'as yet unclassified' }
 PGTermFrequencyInverseDocumentFrequency >> trainOn: aCollectionOfDocuments [
 	numberOfDocuments := aCollectionOfDocuments size.
-	totalWordCounts := (aCollectionOfDocuments flatCollect: #yourself) asBag.
 	perWordDocumentCount := ((aCollectionOfDocuments collect: [ :document | document asSet asArray ]) flatCollect: #yourself) asBag.
 ]
 
@@ -52,5 +50,5 @@ PGTermFrequencyInverseDocumentFrequency >> vectorFor: aDocument [
 
 { #category : #'as yet unclassified' }
 PGTermFrequencyInverseDocumentFrequency >> vocabulary [
-	^ totalWordCounts asSet sorted
+	^ perWordDocumentCount asSet sorted
 ]
