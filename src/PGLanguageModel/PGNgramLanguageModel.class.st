@@ -1,5 +1,5 @@
 Class {
-	#name : #PGLanguageModel,
+	#name : #PGNgramLanguageModel,
 	#superclass : #Object,
 	#instVars : [
 		'trainData',
@@ -11,55 +11,55 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-PGLanguageModel >> buildVocab [
+PGNgramLanguageModel >> buildVocab [
 	^ trainData asBag.
 ]
 
 { #category : #'as yet unclassified' }
-PGLanguageModel >> countOfHistory: anNgramHistory [
+PGNgramLanguageModel >> countOfHistory: anNgramHistory [
 	^ historyCounts occurrencesOf: anNgramHistory
 ]
 
 { #category : #'as yet unclassified' }
-PGLanguageModel >> countOfNgram: anNgram [
+PGNgramLanguageModel >> countOfNgram: anNgram [
 	^ ngramCounts occurrencesOf: anNgram
 ]
 
 { #category : #'as yet unclassified' }
-PGLanguageModel >> countOfUniqueNgramsEndingWith: aWord [
+PGNgramLanguageModel >> countOfUniqueNgramsEndingWith: aWord [
 	^ (ngramCounts asSet select: [ :ngram | ngram last = aWord ]) size
 ]
 
 { #category : #'as yet unclassified' }
-PGLanguageModel >> countOfUniqueNgramsWithHistory: ngram [
+PGNgramLanguageModel >> countOfUniqueNgramsWithHistory: ngram [
 	^ (ngramCounts asSet
 		select: [ :eachNgram | eachNgram history = ngram ]) size.
 ]
 
 { #category : #accessing }
-PGLanguageModel >> historyCounts [
+PGNgramLanguageModel >> historyCounts [
 	^historyCounts
 ]
 
 { #category : #initialization }
-PGLanguageModel >> initialize [ 
+PGNgramLanguageModel >> initialize [ 
 	super initialize.
 	ngramCounts := Bag new.
 	historyCounts := Bag new.
 ]
 
 { #category : #accessing }
-PGLanguageModel >> ngramCounts [
+PGNgramLanguageModel >> ngramCounts [
 	^ngramCounts
 ]
 
 { #category : #accessing }
-PGLanguageModel >> order [ 
+PGNgramLanguageModel >> order [ 
 	^order
 ]
 
 { #category : #'as yet unclassified' }
-PGLanguageModel >> predictNextWord: anNgramHistory [
+PGNgramLanguageModel >> predictNextWord: anNgramHistory [
 	| ngramsWithHistory topOne |
 	ngramsWithHistory := ngramCounts select: [ :ngram | ngram history = anNgramHistory  ].
 	topOne := ngramsWithHistory sortedCounts first value.
@@ -67,7 +67,7 @@ PGLanguageModel >> predictNextWord: anNgramHistory [
 ]
 
 { #category : #'as yet unclassified' }
-PGLanguageModel >> predictNextWord: history top: aNumber [
+PGNgramLanguageModel >> predictNextWord: history top: aNumber [
 	| ngramsWithHistory lo topOnes |
 	ngramsWithHistory := ngramCounts select: [ :ngram | ngram history = history ].
 	ngramsWithHistory := ngramsWithHistory sortedCounts.
@@ -77,7 +77,7 @@ PGLanguageModel >> predictNextWord: history top: aNumber [
 ]
 
 { #category : #'as yet unclassified' }
-PGLanguageModel >> probabilityOfNgram: ngram [
+PGNgramLanguageModel >> probabilityOfNgram: ngram [
 	"Probability of n-gram is a conditional probability of its last word w given the history h (n-gram of order n-1): P(w|h)"
 	|histCount ngramCount|
 	ngramCount := self countOfNgram: ngram.
@@ -90,7 +90,7 @@ PGLanguageModel >> probabilityOfNgram: ngram [
 ]
 
 { #category : #'as yet unclassified' }
-PGLanguageModel >> probabilityOfText: anArrayOfWords [
+PGNgramLanguageModel >> probabilityOfText: anArrayOfWords [
 	| ngrams |
 	ngrams := (anArrayOfWords collect: [ :token | token asLowercase ]) ngrams: order.
 	^(ngrams collect: [ :ngram | self probabilityOfNgram: ngram.])
@@ -99,31 +99,31 @@ PGLanguageModel >> probabilityOfText: anArrayOfWords [
 ]
 
 { #category : #'as yet unclassified' }
-PGLanguageModel >> topNgrams: order [
+PGNgramLanguageModel >> topNgrams: order [
 	| ngramsCollection |
 	ngramsCollection := (trainData ngrams: order) asBag sortedCounts.
 	^ ngramsCollection
 ]
 
 { #category : #'as yet unclassified' }
-PGLanguageModel >> topNgrams: order k: count [
+PGNgramLanguageModel >> topNgrams: order k: count [
 	| ngramsCollection |
 	ngramsCollection := (trainData ngrams: order) asBag sortedCounts.
 	^ (1 to: count) collect: [ :index | ngramsCollection at: index ] 
 ]
 
 { #category : #accessing }
-PGLanguageModel >> totalNgramCountInText [
+PGNgramLanguageModel >> totalNgramCountInText [
 	^ ngramCounts size
 ]
 
 { #category : #accessing }
-PGLanguageModel >> trainData [
+PGNgramLanguageModel >> trainData [
 	^trainData 
 ]
 
 { #category : #'as yet unclassified' }
-PGLanguageModel >> trainOn: anArrayOfTokens order: value [
+PGNgramLanguageModel >> trainOn: anArrayOfTokens order: value [
 	| trainNgrams |
 	
 	order := value.

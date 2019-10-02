@@ -1,5 +1,5 @@
 Class {
-	#name : #PGLanguageModelTest,
+	#name : #PGNgramLanguageModelTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'model'
@@ -8,31 +8,31 @@ Class {
 }
 
 { #category : #running }
-PGLanguageModelTest >> setUp [
+PGNgramLanguageModelTest >> setUp [
 	super setUp.
-	model := PGLanguageModel new.
+	model := PGNgramLanguageModel new.
 ]
 
 { #category : #tests }
-PGLanguageModelTest >> testEmptyModelAssignsZeroCountToNgramOfRightOrder [
+PGNgramLanguageModelTest >> testEmptyModelAssignsZeroCountToNgramOfRightOrder [
 	| ngram |
 	ngram := #(lorem ipsum) asPGNgram.
 	self assert: (model countOfNgram: ngram) equals: 0.
 ]
 
 { #category : #tests }
-PGLanguageModelTest >> testEmptyModelHasTotalNgramCount0 [
+PGNgramLanguageModelTest >> testEmptyModelHasTotalNgramCount0 [
 	self assert: model totalNgramCountInText equals: 0.
 ]
 
 { #category : #tests }
-PGLanguageModelTest >> testEmptyModelOfOrder2HasOrder2 [
+PGNgramLanguageModelTest >> testEmptyModelOfOrder2HasOrder2 [
 	model trainOn: 'test sentence' order: 2. 
 	self assert: model order equals: 2.
 ]
 
 { #category : #tests }
-PGLanguageModelTest >> testTrainedBigramModelIsProbabilityDistribution [
+PGNgramLanguageModelTest >> testTrainedBigramModelIsProbabilityDistribution [
 	| text vocab ngram sumOfProbabilities |
 	text := 'Lorem ipsum dolor sit amet'.
 	vocab := #('<s>' lorem ipsum dolor sit amet).
@@ -48,7 +48,7 @@ PGLanguageModelTest >> testTrainedBigramModelIsProbabilityDistribution [
 ]
 
 { #category : #tests }
-PGLanguageModelTest >> testTrainedModelCounts [
+PGNgramLanguageModelTest >> testTrainedModelCounts [
 	| text ngram1 ngram2 ngram3 ngram4 ngram5 |
 	
 	text := 'lorem ipsum ipsum ipsum dolor'.
@@ -68,7 +68,7 @@ PGLanguageModelTest >> testTrainedModelCounts [
 ]
 
 { #category : #tests }
-PGLanguageModelTest >> testTrainedModelProbabilitiesOfNgrams [
+PGNgramLanguageModelTest >> testTrainedModelProbabilitiesOfNgrams [
 	| text ngram1 ngram2 ngram3 ngram4 ngram5 |
 	
 	text := 'lorem ipsum ipsum ipsum dolor'.
@@ -88,7 +88,7 @@ PGLanguageModelTest >> testTrainedModelProbabilitiesOfNgrams [
 ]
 
 { #category : #tests }
-PGLanguageModelTest >> testTrainedModelProbabilityOfUnknownNgramWithKnownHistoryIs0 [
+PGNgramLanguageModelTest >> testTrainedModelProbabilityOfUnknownNgramWithKnownHistoryIs0 [
 	| text ngram |
 		
 	text := 'lorem ipsum ipsum ipsum dolor'.
@@ -100,7 +100,7 @@ PGLanguageModelTest >> testTrainedModelProbabilityOfUnknownNgramWithKnownHistory
 ]
 
 { #category : #tests }
-PGLanguageModelTest >> testTrainedModelProbabilityOfUnknownNgramWithUnknownHistoryIs0 [
+PGNgramLanguageModelTest >> testTrainedModelProbabilityOfUnknownNgramWithUnknownHistoryIs0 [
 	| text ngram |
 	
 	text := 'lorem ipsum ipsum ipsum dolor'.
@@ -112,7 +112,7 @@ PGLanguageModelTest >> testTrainedModelProbabilityOfUnknownNgramWithUnknownHisto
 ]
 
 { #category : #tests }
-PGLanguageModelTest >> testTrainedModelSelfProbabilityOfText [
+PGNgramLanguageModelTest >> testTrainedModelSelfProbabilityOfText [
 	| text |
 	text := 'lorem ipsum ipsum ipsum dolor'.
 	
@@ -123,7 +123,7 @@ PGLanguageModelTest >> testTrainedModelSelfProbabilityOfText [
 ]
 
 { #category : #tests }
-PGLanguageModelTest >> testTrainedModelSelfProbabilityOfUniformTextIs1 [
+PGNgramLanguageModelTest >> testTrainedModelSelfProbabilityOfUniformTextIs1 [
 	| text |
 	
 	text := 'lorem ipsum dolor sit amet'.
@@ -133,7 +133,7 @@ PGLanguageModelTest >> testTrainedModelSelfProbabilityOfUniformTextIs1 [
 ]
 
 { #category : #tests }
-PGLanguageModelTest >> testTrainedUnigramModelIsProbabilityDistribution [
+PGNgramLanguageModelTest >> testTrainedUnigramModelIsProbabilityDistribution [
 	| text vocab ngram sumOfProbabilities |
 	text := 'Lorem ipsum dolor sit amet'.
 	vocab := #('<s>' lorem ipsum dolor sit amet).
