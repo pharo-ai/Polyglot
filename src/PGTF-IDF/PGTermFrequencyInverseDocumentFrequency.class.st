@@ -46,7 +46,7 @@ PGTermFrequencyInverseDocumentFrequency >> termFrequencyOf: aWord in: aDocument 
 { #category : #'as yet unclassified' }
 PGTermFrequencyInverseDocumentFrequency >> trainOn: aCollectionOfDocuments [
 	numberOfDocuments := aCollectionOfDocuments size.
-	perWordDocumentCount := ((aCollectionOfDocuments collect: [ :document | document asSet asArray ]) flatCollect: #yourself) asBag.
+	perWordDocumentCount := (aCollectionOfDocuments flatCollect: [ :document | document asSet ]) asBag.
 ]
 
 { #category : #'as yet unclassified' }
