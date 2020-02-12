@@ -10,7 +10,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 PGTermFrequencyInverseDocumentFrequency >> inverseDocumentFrequencyOf: aWord [
-	^ (self numberOfDocuments / (self numberOfDocumentsThatContainWord: aWord)) ln.
+	^ self log: (self numberOfDocuments / (self numberOfDocumentsThatContainWord: aWord)).
 ]
 
 { #category : #'instance creation' }
