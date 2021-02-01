@@ -52,17 +52,24 @@ PGTokenizer >> wordTokenize: aString [
 	[ streamPointer atEnd ] whileFalse: [ 
 			cur := streamPointer next.
 			word nextPut: cur.
-			
-			(streamPointer peek isNotNil) 
-				ifTrue: [(streamPointer peek isSeparator)
-					ifTrue: [ wordCollection add: word contents. streamPointer next. word := WriteStream on: (String new).]].
+
+			streamPointer peek isNotNil
+				ifTrue: [ 
+					streamPointer peek isSeparator
+						ifTrue: [ 
+							wordCollection add: word contents. 
+							streamPointer next. 
+							word := WriteStream on: String new.]].
 				
 			(self isSpecial: streamPointer peek)
-				ifTrue: [  wordCollection add: word contents. wordCollection add: streamPointer next. word := WriteStream on: (String new). ].
+				ifTrue: [  
+					wordCollection add: word contents. 
+					wordCollection add: streamPointer next. 
+					word := WriteStream on: String new. ].
 				
-			(cur isSeparator)
-				ifTrue: [ word := WriteStream on: (String new). ].
-	] .
-	(word isEmpty) ifFalse: [ wordCollection add: word contents ].
-	^wordCollection asArray.
+			cur isSeparator
+				ifTrue: [ word := WriteStream on: String new ] ] .
+	word isEmpty 
+		ifFalse: [ wordCollection add: word contents ].
+	^ wordCollection asArray.
 ]
