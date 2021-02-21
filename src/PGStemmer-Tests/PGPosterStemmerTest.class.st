@@ -13,6 +13,15 @@ PGPosterStemmerTest >> setUp [
 ]
 
 { #category : #tests }
+PGPosterStemmerTest >> testStemOf [
+
+	self assert: (PGPorterStemmer stemOf: $a) equals: $a .
+	self assert: (PGPorterStemmer stemOf: String empty) equals: String empty.
+	self assert: (PGPorterStemmer stemOf: 'caresses') equals: 'caress'.
+	self assert: (PGPorterStemmer stemOf: #('sky' 'happy' 'a')) equals: #('sky' 'happi' 'a').
+]
+
+{ #category : #tests }
 PGPosterStemmerTest >> testStep1a_1 [
 	|result expected|
 	expected := 'caress'.

@@ -14,11 +14,14 @@ PGPorterStemmer class >> new [
     self shouldNotImplement.
 ]
 
-{ #category : #'as yet unclassified' }
-PGPorterStemmer class >> stemOf: aString [
-    | stemmer |
-    stemmer := self for: aString.
-	 aString isCharacter ifTrue: [^aString] ifFalse: [^stemmer performStemming: aString].
+{ #category : #'instance creation' }
+PGPorterStemmer class >> stemOf: anObject [
+	" Use anObject to answer a <Collection> of stemmed objects "
+	
+	| stemmer |
+	stemmer := self for: anObject.
+	^ anObject stemFrom: stemmer.
+
 ]
 
 { #category : #initialization }
@@ -32,7 +35,7 @@ PGPorterStemmer >> isVowelAt: anIndex [
 	^#eaoiuy includes: (string at: anIndex)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 PGPorterStemmer >> performStemming: aString [
 	"Performs the Porter stemming algrothim. More see:
 	M. Porter, An algorithm for suffix stripping, Program (1980)/ Vol. 14, No. 3, 130-137"
@@ -55,7 +58,28 @@ PGPorterStemmer >> performStemming: aString [
 	^string
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
+PGPorterStemmer >> performStemmingFromCharacter: aCharacter [ 
+	" Private - See comment in #stemOf: "
+
+	^ aCharacter
+]
+
+{ #category : #private }
+PGPorterStemmer >> performStemmingFromSequenceableCollection: aCollection [ 
+	" Private - See comment in #stemOf: "
+
+	^ aCollection collect: [ : obj | self performStemming: obj ].
+]
+
+{ #category : #private }
+PGPorterStemmer >> performStemmingFromString: aString [ 
+	" Private - See comment in #stemOf: "
+
+	^ self performStemming: aString.
+]
+
+{ #category : #private }
 PGPorterStemmer >> preprocessing [
 	
 	string first = $y ifTrue: [string at: 1 put: $Y].
@@ -67,7 +91,7 @@ PGPorterStemmer >> preprocessing [
 				ifTrue: [string at: index put: $Y]]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 PGPorterStemmer >> stemEndsWithConsonantVowelConsonant [
 	
 	^cursor >= 3
@@ -79,7 +103,7 @@ PGPorterStemmer >> stemEndsWithConsonantVowelConsonant [
 							[(self isVowelAt: cursor - 1) and: [self isConsonantAt: cursor - 2]]]]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 PGPorterStemmer >> stemEndsWithDoubleConsonant [
 	"comment stating purpose of message"
 	
@@ -89,7 +113,7 @@ PGPorterStemmer >> stemEndsWithDoubleConsonant [
 				and: [self isConsonantAt: cursor]]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 PGPorterStemmer >> stemIncludesVowel [
 	"comment stating purpose of message"
 	
@@ -99,7 +123,7 @@ PGPorterStemmer >> stemIncludesVowel [
 	^false
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #pages }
 PGPorterStemmer >> step1a [
 	"comment stating purpose of message"
 	
@@ -124,7 +148,7 @@ PGPorterStemmer >> step1a [
 										to: string size - 1.^self]]]]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #pages }
 PGPorterStemmer >> step1b [
 	"comment stating purpose of message"
 	
@@ -157,7 +181,7 @@ PGPorterStemmer >> step1b [
 				ifTrue: [self setSuffix: 'e']]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #pages }
 PGPorterStemmer >> step1c [
 	
 	(((self endsWith: 'y') or: [self endsWith: 'Y'])
@@ -218,7 +242,7 @@ PGPorterStemmer >> step4 [
 					^self]]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #pages }
 PGPorterStemmer >> step5a [
 	
 	cursor := string size - 1.
@@ -232,7 +256,7 @@ PGPorterStemmer >> step5a [
 			^self]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #pages }
 PGPorterStemmer >> step5b [
 	
 	cursor := string size.
