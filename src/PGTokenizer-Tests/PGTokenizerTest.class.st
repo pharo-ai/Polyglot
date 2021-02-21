@@ -46,9 +46,11 @@ PGTokenizerTest >> testTokenize [
 { #category : #'as yet unclassified' }
 PGTokenizerTest >> testTokenizeFlatten [
 	|result expected text|
+	
+	tokenizer := PGWordTokenizer new.
 	text := 'This is test sentence 1. This is test sentence 2.'.
 	
-	expected := #('This' 'is' 'test' 'sentence' '1' $. 'This' 'is' 'test' 'sentence' '2' $.).
+	expected := #('This' 'is' 'test' 'sentence' '1' 'This' 'is' 'test' 'sentence' '2').
 	result := tokenizer tokenizeFlatten: text.
 	self assert: result equals: expected.
 ]
