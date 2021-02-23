@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'perWordDocumentCount',
-		'numberOfDocuments'
+		'numberOfDocuments',
+		'vocabulary'
 	],
 	#category : #'PGTF-IDF'
 }
@@ -56,5 +57,6 @@ PGTermFrequencyInverseDocumentFrequency >> vectorFor: aDocument [
 
 { #category : #'as yet unclassified' }
 PGTermFrequencyInverseDocumentFrequency >> vocabulary [
-	^ perWordDocumentCount asSet sorted
+	^ vocabulary 
+		ifNil: [ vocabulary := perWordDocumentCount asSet sorted ]
 ]

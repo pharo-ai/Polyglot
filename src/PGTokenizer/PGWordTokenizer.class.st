@@ -1,3 +1,27 @@
+"
+Name: PGWordTokenizer
+
+Implements punctuation aware word tokenization. Set beSkipSpecial to consider special characters.
+
+Users: 
+ - PGTokenizerTest
+ - String
+
+Used: 
+ - OrderedCollection
+ - PGTokenizer
+ - PGWordTokenizer
+ - ReadStream
+ - String
+ - WriteStream
+
+Public methods:
+ - tokenize:
+ - wordTokenize:
+ - defaultSpecialCharset
+
+Keywords: tokenize
+"
 Class {
 	#name : #PGWordTokenizer,
 	#superclass : #PGTokenizer,
@@ -18,7 +42,7 @@ PGWordTokenizer >> beSkipSpecial [
 PGWordTokenizer >> defaultSpecialCharset [
 	" Answer a <String> with Character(s) to be considered as special for the receiver "
 
-	^ '+\*~<>=@,%|&?!(){}[]:;."'''
+	^ '+\*~<>=@,%|&?!(){}[]:;."''-'
 ]
 
 { #category : #initialization }
@@ -46,6 +70,19 @@ PGWordTokenizer >> nextIsInvalid: aStream [
 	^ aStream atEnd
 ]
 
+{ #category : #defaults }
+PGWordTokenizer >> specialArtifacts [
+	" Answer a <Collection> of <String> representing artifacts commonly found in natural language written text. Generate them in reverse order so larger occurrences can be detected first. "
+	
+	^ #('<br />' ':-)' ':-(' ':)' ':(') asOrderedCollection 
+	addAll: (
+		(#($- $! $? $* $( $) $\ $/ $| $_ $# $> $< $% $" $$ $, $.) collect: [ : repChar |
+			(2 to: 10) reversed collect: [ : rep | String new: rep withAll: repChar ] ]) joinUsing: Array empty
+	);
+	yourself 
+	
+]
+
 { #category : #tokenizing }
 PGWordTokenizer >> tokenize: aDocOrString [
 	" Consider a aDocOrString tokenizable by spaces. Answer a <Collection> of <String> each one a token "
@@ -70,21 +107,21 @@ PGWordTokenizer >> wordTokenize: aString [
 				ifTrue: [ 
 					streamPointer peek isSeparator
 						ifTrue: [ 
-							wordCollection add: word contents. 
+							wordCollection add: word contents trimBoth. 
 							streamPointer next. 
 							word := WriteStream on: String new.]].
 				
 			(self isSpecial: streamPointer peek)
 				ifTrue: [  
 					word isEmpty 
-						ifFalse: [ wordCollection add: word contents ].
+						ifFalse: [ wordCollection add: word contents trimBoth ].
 					self isSkipSpecial	
-						ifFalse: [ wordCollection add: streamPointer next ]. 
+						ifFalse: [ wordCollection add: streamPointer next trimBoth ]. 
 					word := WriteStream on: String new. ].
 				
 			cur isSeparator
 				ifTrue: [ word := WriteStream on: String new ] ] .
 	word isEmpty 
-		ifFalse: [ wordCollection add: word contents ].
+		ifFalse: [ wordCollection add: word contents trimBoth ].
 	^ wordCollection asArray.
 ]

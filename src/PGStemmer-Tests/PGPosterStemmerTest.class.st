@@ -19,6 +19,7 @@ PGPosterStemmerTest >> testStemOf [
 	self assert: (PGPorterStemmer stemOf: String empty) equals: String empty.
 	self assert: (PGPorterStemmer stemOf: 'caresses') equals: 'caress'.
 	self assert: (PGPorterStemmer stemOf: #('sky' 'happy' 'a')) equals: #('sky' 'happi' 'a').
+	self assert: (PGPorterStemmer stemOf: 'Working with one of the best') equals: #('sky' 'happi' 'a').
 ]
 
 { #category : #tests }
