@@ -15,7 +15,7 @@ BaselineOfPolyglot >> baseline: spec [
 			
 		"Packages"
 		spec 
-			package: 'PGTokenizer';					with: [ spec requires: #('AIStopwords') ];
+			package: 'PGTokenizer'					with: [ spec requires: #('AIStopwords') ];
 			package: 'PGTokenizer-Tests' 			with: [ spec requires: #('PGTokenizer') ];
 			package: 'PGNgram';
 			package: 'PGNgram-Tests' 				with: [ spec requires: #('PGNgram') ];
