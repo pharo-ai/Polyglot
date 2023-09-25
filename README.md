@@ -7,6 +7,8 @@
 [![Pharo version](https://img.shields.io/badge/Pharo-7.0-%23aac9ff.svg)](https://pharo.org/download)
 [![Pharo version](https://img.shields.io/badge/Pharo-8.0-%23aac9ff.svg)](https://pharo.org/download)
 
+This repository is marked as a public archive and it will be deleted in the future. It contains duplicated code that it can be found in the other pharo-ai repositories. We encourage you to look into the other NLP repositories that we have inside pharo-ai.
+
 A library for Natural Language Processing implemented in Pharo. To get more information, check out the [Polyglot Booklet](https://github.com/SquareBracketAssociates/Booklet-Polyglot).
 
 ## Installation
